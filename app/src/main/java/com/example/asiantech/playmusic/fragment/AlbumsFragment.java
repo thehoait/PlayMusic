@@ -3,7 +3,6 @@ package com.example.asiantech.playmusic.fragment;
 import android.content.ContentUris;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -63,13 +62,12 @@ public class AlbumsFragment extends Fragment {
         mGvAlbums.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlbumDetailFragment_ fragment = new AlbumDetailFragment_();
-                Bundle bundle = new Bundle();
-                bundle.putLong("albumId", mListAlbum.get(position).getAlbumId());
-                fragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager()
                         .beginTransaction();
-                transaction.add(R.id.rlContainer, fragment);
+                transaction.add(R.id.rlContainer, AlbumDetailFragment_
+                        .builder()
+                        .albumId(mListAlbum.get(position).getAlbumId())
+                        .build());
                 transaction.addToBackStack(null);
                 transaction.commit();
             }

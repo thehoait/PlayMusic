@@ -31,6 +31,7 @@ import com.example.asiantech.playmusic.fragment.PlaySongFragment_;
 import com.example.asiantech.playmusic.fragment.SongListFragment_;
 import com.example.asiantech.playmusic.model.Song;
 import com.example.asiantech.playmusic.service.MusicService;
+import com.example.asiantech.playmusic.utils.StringUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -40,8 +41,6 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Formatter;
-import java.util.Locale;
 
 import lombok.Getter;
 
@@ -303,7 +302,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
             long position = 1000L * currentPosition / duration;
             mSeekBar.setProgress((int) position);
         }
-        mTvCurrentTime.setText(stringForTime(currentPosition));
+        mTvCurrentTime.setText(StringUtils.stringForTime(currentPosition));
         mHandler.postDelayed(mRunnable, 1000);
 
     }
@@ -311,7 +310,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     private void setSongTime() {
         Log.d(TAG, "setSongTime: ");
         int duration = getDuration();
-        mTvSongTime.setText(stringForTime(duration));
+        mTvSongTime.setText(StringUtils.stringForTime(duration));
     }
 
     private String getSongTitle() {
@@ -416,23 +415,6 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
             }
         }
         return false;
-    }
-
-    private String stringForTime(int timeMs) {
-        int totalSeconds = timeMs / 1000;
-
-        int seconds = totalSeconds % 60;
-        int minutes = (totalSeconds / 60) % 60;
-        int hours = totalSeconds / 3600;
-
-        StringBuilder formatBuilder = new StringBuilder();
-        formatBuilder.setLength(0);
-        Formatter formatter = new Formatter(formatBuilder, Locale.getDefault());
-        if (hours > 0) {
-            return formatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
-        } else {
-            return formatter.format("%02d:%02d", minutes, seconds).toString();
-        }
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.example.asiantech.playmusic.fragment;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -57,13 +56,12 @@ public class ArtistFragment extends Fragment implements OnItemListener {
 
     @Override
     public void onItemClick(int position) {
-        ArtistDetailFragment_ fragment = new ArtistDetailFragment_();
-        Bundle bundle = new Bundle();
-        bundle.putLong("artistId", mListArtist.get(position).getArtistId());
-        fragment.setArguments(bundle);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager()
                 .beginTransaction();
-        transaction.add(R.id.rlContainer, fragment);
+        transaction.add(R.id.rlContainer, ArtistDetailFragment_
+                .builder()
+                .albumId(mListArtist.get(position).getArtistId())
+                .build());
         transaction.addToBackStack(null);
         transaction.commit();
     }

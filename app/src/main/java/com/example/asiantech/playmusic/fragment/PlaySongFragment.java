@@ -16,14 +16,12 @@ import com.example.asiantech.playmusic.MainActivity;
 import com.example.asiantech.playmusic.R;
 import com.example.asiantech.playmusic.adapter.PlaySongAdapter;
 import com.example.asiantech.playmusic.service.MusicService;
+import com.example.asiantech.playmusic.utils.StringUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
-
-import java.util.Formatter;
-import java.util.Locale;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -195,7 +193,7 @@ public class PlaySongFragment extends Fragment {
     private void setSongTime() {
         Log.d(TAG, "setSongTime: ");
         int duration = mMusicService.getDur();
-        mTvSongTime.setText(stringForTime(duration));
+        mTvSongTime.setText(StringUtils.stringForTime(duration));
     }
 
     private void setSongTitle() {
@@ -210,25 +208,8 @@ public class PlaySongFragment extends Fragment {
             long position = 1000L * currentPosition / duration;
             mSeekBar.setProgress((int) position);
         }
-        mTvCurrentTime.setText(stringForTime(currentPosition));
+        mTvCurrentTime.setText(StringUtils.stringForTime(currentPosition));
         mHandler.postDelayed(mRunnable, 1000);
-    }
-
-    private String stringForTime(int timeMs) {
-        int totalSeconds = timeMs / 1000;
-
-        int seconds = totalSeconds % 60;
-        int minutes = (totalSeconds / 60) % 60;
-        int hours = totalSeconds / 3600;
-
-        StringBuilder formatBuilder = new StringBuilder();
-        formatBuilder.setLength(0);
-        Formatter formatter = new Formatter(formatBuilder, Locale.getDefault());
-        if (hours > 0) {
-            return formatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
-        } else {
-            return formatter.format("%02d:%02d", minutes, seconds).toString();
-        }
     }
 
     private void updatePlayPause() {
