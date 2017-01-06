@@ -20,6 +20,9 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+/**
+ * @author hoaht
+ */
 @EFragment(R.layout.visualizor_fragment)
 public class VisualizerFragment extends Fragment {
     @ViewById(R.id.imgCircleMusic)
@@ -80,6 +83,9 @@ public class VisualizerFragment extends Fragment {
         mAnimation.cancel();
     }
 
+    /**
+     * Circle Animation
+     */
     public class CircleAnimation extends RotateAnimation {
 
         private long mElapsedAtPause = 0;
@@ -95,8 +101,9 @@ public class VisualizerFragment extends Fragment {
             if (mPaused && mElapsedAtPause == 0) {
                 mElapsedAtPause = currentTime - getStartTime();
             }
-            if (mPaused)
+            if (mPaused) {
                 setStartTime(currentTime - mElapsedAtPause);
+            }
             return super.getTransformation(currentTime, outTransformation);
         }
 

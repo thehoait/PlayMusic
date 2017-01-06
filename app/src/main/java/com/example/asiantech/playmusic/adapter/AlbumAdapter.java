@@ -13,6 +13,9 @@ import com.example.asiantech.playmusic.model.Album;
 
 import java.util.ArrayList;
 
+/**
+ * @author hoaht
+ */
 public class AlbumAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Album> mListAlbum;
@@ -44,7 +47,7 @@ public class AlbumAdapter extends BaseAdapter {
                     false);
         }
         TextView tvNameAlbum = (TextView) convertView.findViewById(R.id.tvNameAlbum);
-        tvNameAlbum.setText(mListAlbum.get(position).getAlbum());
+        tvNameAlbum.setText(mListAlbum.get(position).getAlbumName());
         ImageView imgAlbum = (ImageView) convertView.findViewById(R.id.imgAlbum);
         if (mListAlbum.get(position).getAlbumImage() != null) {
             imgAlbum.setImageBitmap(mListAlbum.get(position).getAlbumImage());

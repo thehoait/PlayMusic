@@ -28,41 +28,47 @@ import java.util.Locale;
 import me.relex.circleindicator.CircleIndicator;
 
 /**
- * @author HoaHT
+ * @author hoaht
  */
 @EFragment(R.layout.play_song_fragment)
 public class PlaySongFragment extends Fragment {
+
     @ViewById(R.id.tvSongTitle)
     TextView mTvSongTitle;
+
     @ViewById(R.id.seekBar)
     SeekBar mSeekBar;
+
     @ViewById(R.id.tvCurrentTime)
     TextView mTvCurrentTime;
+
     @ViewById(R.id.tvSongTime)
     TextView mTvSongTime;
+
     @ViewById(R.id.imgPlay)
     ImageView mImgPlay;
+
     @ViewById(R.id.imgMode)
     ImageView mImgMode;
+
     @ViewById(R.id.pager)
     ViewPager mViewPager;
+
     @ViewById(R.id.indicator)
     CircleIndicator mIndicator;
+
+    private static final String TAG = PlaySongFragment.class.getSimpleName();
     private MusicService mMusicService;
-    private StringBuilder mFormatBuilder;
-    private Formatter mFormatter;
     private Handler mHandler = new Handler();
     private int mMode;
 
     @AfterViews
     void afterView() {
-        Log.d("TAG PLAY_SONG", "afterView");
+        Log.d(TAG, "afterView: ");
         intView();
         if (getActivity() instanceof MainActivity) {
             mMusicService = ((MainActivity) getActivity()).getMMusicService();
         }
-        mFormatBuilder = new StringBuilder();
-        mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
         mSeekBar.setMax(1000);
         setSongTitle();
         updatePlayPause();
@@ -77,7 +83,7 @@ public class PlaySongFragment extends Fragment {
     }
 
     private void intView() {
-        Log.d("TAG PLAY_SONG", "initView");
+        Log.d(TAG, "intView: ");
         PlaySongAdapter adapter = new PlaySongAdapter(getChildFragmentManager());
         mViewPager.setAdapter(adapter);
         mIndicator.setViewPager(mViewPager);
@@ -187,13 +193,13 @@ public class PlaySongFragment extends Fragment {
     }
 
     private void setSongTime() {
-        Log.d("TAG PLAY_SONG", "setSongTime");
+        Log.d(TAG, "setSongTime: ");
         int duration = mMusicService.getDur();
         mTvSongTime.setText(stringForTime(duration));
     }
 
     private void setSongTitle() {
-        Log.d("TAG PLAY_SONG", "setSongTime");
+        Log.d(TAG, "setSongTitle: ");
         mTvSongTitle.setText(mMusicService.getSongTitle());
     }
 
@@ -215,16 +221,18 @@ public class PlaySongFragment extends Fragment {
         int minutes = (totalSeconds / 60) % 60;
         int hours = totalSeconds / 3600;
 
-        mFormatBuilder.setLength(0);
+        StringBuilder formatBuilder = new StringBuilder();
+        formatBuilder.setLength(0);
+        Formatter formatter = new Formatter(formatBuilder, Locale.getDefault());
         if (hours > 0) {
-            return mFormatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
+            return formatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
         } else {
-            return mFormatter.format("%02d:%02d", minutes, seconds).toString();
+            return formatter.format("%02d:%02d", minutes, seconds).toString();
         }
     }
 
     private void updatePlayPause() {
-        Log.d("TAG PLAY_SONG", "updatePlayPause");
+        Log.d(TAG, "updatePlayPause: ");
         if (mMusicService.isPlaying()) {
             mImgPlay.setImageResource(R.drawable.music_play_control_pause);
         } else {
@@ -233,7 +241,7 @@ public class PlaySongFragment extends Fragment {
     }
 
     public void resetController() {
-        Log.d("TAG PLAY_SONG", "resetController");
+        Log.d(TAG, "resetController: ");
         if (mHandler != null && mRunnable != null) {
             mHandler.removeCallbacks(mRunnable);
         }
@@ -241,7 +249,7 @@ public class PlaySongFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        Log.d("TAG PLAY_SONG", "onDestroy");
+        Log.d(TAG, "onDestroy: ");
         if (mHandler != null) {
             mHandler.removeCallbacks(mRunnable);
         }

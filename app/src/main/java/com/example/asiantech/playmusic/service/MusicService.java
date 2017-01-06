@@ -27,10 +27,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * @author HoaHT
+ * @author hoaht
  */
 public class MusicService extends Service implements MediaPlayer.OnPreparedListener,
         MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
+
+    private static final String TAG = MusicService.class.getSimpleName();
+    private static final String ACTION = "action";
     private MediaPlayer mMediaPlayer;
     private ArrayList<Song> mPlayList;
     private int mSongPosition;
@@ -48,15 +51,15 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public void onCreate() {
-        Log.d("TAG SERVICE", "onCreate");
         super.onCreate();
+        Log.d(TAG, "onCreate: ");
         mMediaPlayer = new MediaPlayer();
         initPlayer();
         createNotification();
     }
 
     private void initPlayer() {
-        Log.d("TAG SERVICE", "initPlayer");
+        Log.d(TAG, "initPlayer: ");
         mMediaPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setOnPreparedListener(this);
@@ -66,7 +69,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("TAG SERVICE", "onStartCommand");
+        Log.d(TAG, "onStartCommand: ");
         return START_NOT_STICKY;
     }
 
@@ -77,21 +80,21 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public boolean onUnbind(Intent intent) {
-        Log.d("TAG SERVICE", "onUnbind");
+        Log.d(TAG, "onUnbind: ");
         return true;
     }
 
     @Override
     public void onRebind(Intent intent) {
-        Log.d("TAG SERVICE", "onRebind");
         super.onRebind(intent);
+        Log.d(TAG, "onRebind: ");
         mMessage = "onRebind";
         sendBroadcast();
     }
 
     @Override
     public void onDestroy() {
-        Log.d("TAG SERVICE", "onDestroy");
+        Log.d(TAG, "onDestroy: ");
         if (isPlayMusic()) {
             mMediaPlayer.stop();
         }
@@ -101,7 +104,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        Log.d("TAG SERVICE", "onCompletion");
+        Log.d(TAG, "onCompletion: ");
         mMessage = "completion";
         sendBroadcast();
         switch (mMode) {
@@ -126,12 +129,12 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
-        Log.d("TAG SERVICE", "onError");
+        Log.d(TAG, "onError: ");
         return false;
     }
 
     public void playSong() {
-        Log.d("TAG SERVICE", "playSong");
+        Log.d(TAG, "playSong: ");
         mMessage = "reset";
         sendBroadcast();
         mMediaPlayer.reset();
@@ -140,14 +143,14 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         try {
             mMediaPlayer.setDataSource(getApplicationContext(), uri);
         } catch (IOException e) {
-            Log.e("MUSIC SERVICE", "Error set data source");
+            Log.e(TAG, "playSong: " + e);
         }
         mMediaPlayer.prepareAsync();
     }
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-        Log.d("TAG SERVICE", "onPrepared");
+        Log.d(TAG, "onPrepared: ");
         mp.start();
         updateNotification();
         mMessage = "play";
@@ -156,7 +159,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void setPlayList(ArrayList<Song> listSong) {
-        Log.d("TAG SERVICE", "setPlayList");
+        Log.d(TAG, "setPlayList: ");
         mPlayList = listSong;
     }
 
@@ -173,7 +176,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void setSong(int position) {
-        Log.d("TAG SERVICE", "setSong");
+        Log.d(TAG, "setSong: ");
         this.mSongPosition = position;
     }
 
@@ -186,7 +189,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     private void createNotification() {
-        Log.d("TAG SERVICE", "createNotification");
+        Log.d(TAG, "createNotification: ");
         mRemoteViews = new RemoteViews(getPackageName(), R.layout.notification_play_music);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.icon_notification)
@@ -203,16 +206,16 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     private void setListenerNotification() {
         Intent intent = new Intent(this, MusicReceiver.class);
-        intent.putExtra("action", "close");
+        intent.putExtra(ACTION, "close");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
         mRemoteViews.setOnClickPendingIntent(R.id.imgClose, pendingIntent);
-        intent.putExtra("action", "play");
+        intent.putExtra(ACTION, "play");
         pendingIntent = PendingIntent.getBroadcast(this, 2, intent, 0);
         mRemoteViews.setOnClickPendingIntent(R.id.imgPlay, pendingIntent);
-        intent.putExtra("action", "back");
+        intent.putExtra(ACTION, "back");
         pendingIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
         mRemoteViews.setOnClickPendingIntent(R.id.imgPrevious, pendingIntent);
-        intent.putExtra("action", "next");
+        intent.putExtra(ACTION, "next");
         pendingIntent = PendingIntent.getBroadcast(this, 4, intent, 0);
         mRemoteViews.setOnClickPendingIntent(R.id.imgNext, pendingIntent);
     }
@@ -227,15 +230,19 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         startForeground(NOTIFICATION_ID, mNotification);
     }
 
+    /**
+     * Music Binder
+     */
     public class MusicBinder extends Binder {
+
         public MusicService getService() {
-            Log.d("TAG SERVICE", "getService");
+            Log.d(TAG, "getService: ");
             return MusicService.this;
         }
     }
 
     public void go() {
-        Log.d("TAG SERVICE", "go");
+        Log.d(TAG, "go: ");
         mMediaPlayer.start();
         mMessage = "play";
         sendBroadcast();
@@ -243,7 +250,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void pausePlayer() {
-        Log.d("TAG SERVICE", "pausePlayer");
+        Log.d(TAG, "pausePlayer: ");
         mMediaPlayer.pause();
         mPause = true;
         mMessage = "pause";
@@ -252,7 +259,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void playNext() {
-        Log.d("TAG SERVICE", "playNext");
+        Log.d(TAG, "playNext: ");
         mSongPosition++;
         if (mSongPosition >= mPlayList.size()) {
             mSongPosition = 0;
@@ -261,7 +268,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void playPrev() {
-        Log.d("TAG SERVICE", "playPrev");
+        Log.d(TAG, "playPrev: ");
         mSongPosition--;
         if (mSongPosition < 0) {
             mSongPosition = mPlayList.size() - 1;
@@ -270,7 +277,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void playRandom() {
-        Log.d("TAG SERVICE", "playRandom");
+        Log.d(TAG, "playRandom: ");
         Random random = new Random();
         mSongPosition = random.nextInt(mPlayList.size() - 1);
         playSong();
@@ -314,7 +321,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     private void sendBroadcast() {
-        Log.d("TAG SERVICE", "sendBroadcast");
+        Log.d(TAG, "sendBroadcast: ");
         Intent intent = new Intent();
         intent.setAction(MainActivity.ACTION_STRING_ACTIVITY);
         intent.putExtra("message", mMessage);

@@ -7,6 +7,9 @@ import android.util.Log;
 
 import com.example.asiantech.playmusic.service.MusicService;
 
+/**
+ * @author hoaht
+ */
 public class MusicReceiver extends BroadcastReceiver {
 
     public MusicReceiver() {

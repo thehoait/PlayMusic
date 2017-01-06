@@ -17,6 +17,9 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
+/**
+ * @author hoaht
+ */
 @EFragment(R.layout.song_list_fragment)
 public class SongListFragment extends Fragment {
     @ViewById(R.id.recycleViewListSong)
@@ -27,7 +30,7 @@ public class SongListFragment extends Fragment {
 
     @AfterViews
     void afterView() {
-        Log.d("TAG SONG LIST FRAGMENT","afterView");
+        Log.d("TAG SONG LIST FRAGMENT", "afterView");
         mListSong = new ArrayList<>();
         if (getActivity() instanceof MainActivity_) {
             mListSong = ((MainActivity_) getActivity()).getMListSong();

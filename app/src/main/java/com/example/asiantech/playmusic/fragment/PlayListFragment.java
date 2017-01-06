@@ -23,6 +23,9 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
+/**
+ * @author hoaht
+ */
 @EFragment(R.layout.play_list_fragment)
 public class PlayListFragment extends Fragment implements OnItemListener {
     @ViewById(R.id.recycleViewPlayList)

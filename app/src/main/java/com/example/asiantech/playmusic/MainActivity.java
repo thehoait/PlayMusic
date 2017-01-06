@@ -1,5 +1,6 @@
 package com.example.asiantech.playmusic;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -44,25 +45,37 @@ import java.util.Locale;
 
 import lombok.Getter;
 
+/**
+ * @author hoaht
+ */
+@SuppressLint("Registered")
 @EActivity(R.layout.activity_main)
 public class MainActivity extends FragmentActivity implements OnItemListener {
 
     @ViewById(R.id.tabStrip)
     PagerSlidingTabStrip mTabStrip;
+
     @ViewById(R.id.viewPager)
     ViewPager mViewPager;
+
     @ViewById(R.id.imgPlay)
     ImageView mImgPlay;
+
     @ViewById(R.id.seekBar)
     SeekBar mSeekBar;
+
     @ViewById(R.id.tvCurrentTime)
     TextView mTvCurrentTime;
+
     @ViewById(R.id.tvSongTime)
     TextView mTvSongTime;
+
     @ViewById(R.id.llController)
     LinearLayout mController;
+
     @ViewById(R.id.tvSongTitle)
     TextView mTvSongTitle;
+
     @Getter
     private OnItemListener mOnItemListener;
     @Getter
@@ -71,9 +84,8 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     @Getter
     private MusicService mMusicService;
     private Intent mPlayIntent;
-    private StringBuilder mFormatBuilder;
-    private Formatter mFormatter;
     private Handler mHandler = new Handler();
+    private static final String TAG = MainActivity.class.getSimpleName();
     public static final String ACTION_STRING_ACTIVITY = "ToActivity";
     public static final String LIST_TYPE_ALL_SONG = "AllSong";
     public static final String LIST_TYPE_ALBUM = "Album";
@@ -83,7 +95,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
 
     @AfterViews
     void afterView() {
-        Log.d("TAG ACTIVITY", "afterView");
+        Log.d(TAG, "afterView: ");
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             mMessage = intent.getExtras().getString("message");
@@ -101,8 +113,6 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
         mTabStrip.setViewPager(mViewPager);
         mController.setVisibility(View.GONE);
         mTvSongTitle.setSelected(true);
-        mFormatBuilder = new StringBuilder();
-        mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
         mSeekBar.setMax(1000);
         mSeekBar.setOnSeekBarChangeListener(mListener);
         if (mReceiver != null) {
@@ -114,7 +124,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     private ServiceConnection mMusicConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.d("TAG ACTIVITY", "onServiceConnected");
+            Log.d(TAG, "onServiceConnected: ");
             MusicService.MusicBinder binder = (MusicService.MusicBinder) service;
             mMusicService = binder.getService();
             if (mMusicService.getListType().equals("")) {
@@ -126,7 +136,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.d("TAG ACTIVITY", "onServiceDisconnected");
+            Log.d(TAG, "onServiceDisconnected: ");
             mBound = false;
         }
     };
@@ -141,7 +151,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("TAG ACTIVITY", "onReceive");
+            Log.d(TAG, "onReceive: ");
             if (intent != null) {
                 String message = intent.getExtras().getString("message");
                 if (message != null) {
@@ -173,8 +183,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     };
 
     private void updateSongPlay() {
-
-        Log.d("TAG ACTIVITY", "updateSongPlay");
+        Log.d(TAG, "updateSongPlay: ");
         for (int i = 0; i < mListSong.size(); i++) {
             mListSong.get(i).setPlaying(false);
         }
@@ -208,7 +217,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     };
 
     private void getListSong() {
-        Log.d("TAG ACTIVITY", "getListSong");
+        Log.d(TAG, "getListSong: ");
         ContentResolver musicResolver = getContentResolver();
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
@@ -243,7 +252,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
 
     @Click(R.id.imgPlay)
     void onClickPlay() {
-        Log.d("TAG ACTIVITY", "onClickPlay");
+        Log.d(TAG, "onClickPlay: ");
         if (mMusicService != null && mBound) {
             if (isPlaying()) {
                 pause();
@@ -255,21 +264,21 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
 
     @Click(R.id.imgNext)
     void onClickNext() {
-        Log.d("TAG ACTIVITY", "onClickNext");
+        Log.d(TAG, "onClickNext: ");
         resetController();
         mMusicService.playNext();
     }
 
     @Click(R.id.imgPrevious)
     void onClickPrev() {
-        Log.d("TAG ACTIVITY", "onClickPrev");
+        Log.d(TAG, "onClickPrev: ");
         resetController();
         mMusicService.playPrev();
     }
 
     @Click(R.id.rlMainController)
     void onClickMainController() {
-        Log.d("TAG ACTIVITY", "onClickMainController");
+        Log.d(TAG, "onClickMainController: ");
         PlaySongFragment_ fragment = new PlaySongFragment_();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_up);
@@ -279,7 +288,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     }
 
     private void updatePlayPause() {
-        Log.d("TAG ACTIVITY", "updatePlayPause");
+        Log.d(TAG, "updatePlayPause: ");
         if (isPlaying()) {
             mImgPlay.setImageResource(R.drawable.main_control_pause);
         } else {
@@ -300,7 +309,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     }
 
     private void setSongTime() {
-        Log.d("TAG ACTIVITY", "setSongTime");
+        Log.d(TAG, "setSongTime: ");
         int duration = getDuration();
         mTvSongTime.setText(stringForTime(duration));
     }
@@ -313,12 +322,12 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     }
 
     private void start() {
-        Log.d("TAG ACTIVITY", "start");
+        Log.d(TAG, "start: ");
         mMusicService.go();
     }
 
     private void pause() {
-        Log.d("TAG ACTIVITY", "pause");
+        Log.d(TAG, "pause: ");
         mMusicService.pausePlayer();
     }
 
@@ -344,13 +353,13 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
 
     @Override
     protected void onStart() {
-        Log.d("TAG ACTIVITY", "onStart");
+        Log.d(TAG, "onStart: ");
         super.onStart();
         connectService();
     }
 
     private void connectService() {
-        Log.d("TAG ACTIVITY", "connectService");
+        Log.d(TAG, "connectService: ");
         if (mPlayIntent == null) {
             mPlayIntent = new Intent(this, MusicService.class);
         }
@@ -362,32 +371,32 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
 
     @Override
     protected void onRestart() {
-        Log.d("TAG ACTIVITY", "onRestart");
+        Log.d(TAG, "onRestart: ");
         super.onRestart();
     }
 
     @Override
     protected void onResume() {
-        Log.d("TAG ACTIVITY", "onResume");
+        Log.d(TAG, "onResume: ");
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        Log.d("TAG ACTIVITY", "onPause");
+        Log.d(TAG, "onPause: ");
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        Log.d("TAG ACTIVITY", "onStop");
+        Log.d(TAG, "onStop: ");
         unbindService(mMusicConnection);
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.d("TAG ACTIVITY", "onDestroy");
+        Log.d(TAG, "onDestroy: ");
         if (mMusicService != null && mBound && !mMusicService.isPlayMusic()) {
             stopService(mPlayIntent);
         }
@@ -398,7 +407,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     }
 
     private boolean isServiceRunning() {
-        Log.d("TAG ACTIVITY", "isServiceRunning");
+        Log.d(TAG, "isServiceRunning: ");
         ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(
                 Integer.MAX_VALUE)) {
@@ -416,17 +425,19 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
         int minutes = (totalSeconds / 60) % 60;
         int hours = totalSeconds / 3600;
 
-        mFormatBuilder.setLength(0);
+        StringBuilder formatBuilder = new StringBuilder();
+        formatBuilder.setLength(0);
+        Formatter formatter = new Formatter(formatBuilder, Locale.getDefault());
         if (hours > 0) {
-            return mFormatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
+            return formatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
         } else {
-            return mFormatter.format("%02d:%02d", minutes, seconds).toString();
+            return formatter.format("%02d:%02d", minutes, seconds).toString();
         }
     }
 
     @Override
     public void onItemClick(int position) {
-        Log.d("TAG ACTIVITY", "onItemClick");
+        Log.d(TAG, "onItemClick: ");
         if (!mMusicService.getListType().equals(LIST_TYPE_ALL_SONG)) {
             mMusicService.setPlayList(mListSong);
             mMusicService.setListType(LIST_TYPE_ALL_SONG);
@@ -445,7 +456,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     }
 
     public void resetController() {
-        Log.d("TAG ACTIVITY", "resetController");
+        Log.d(TAG, "resetController: ");
         if (mHandler != null && mRunnable != null) {
             mHandler.removeCallbacks(mRunnable);
         }

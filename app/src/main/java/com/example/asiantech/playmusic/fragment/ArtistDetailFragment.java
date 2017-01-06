@@ -25,6 +25,9 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
+/**
+ * @author hoaht
+ */
 @EFragment(R.layout.list_detail_fragment)
 public class ArtistDetailFragment extends Fragment implements OnItemListener {
     @ViewById(R.id.recycleViewListSong)

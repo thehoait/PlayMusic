@@ -5,9 +5,12 @@ import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * @author hoaht
+ */
 @Data
 @AllArgsConstructor(suppressConstructorProperties = true)
-public class Song implements Serializable{
+public class Song implements Serializable {
     private long id;
     private String title;
     private long artistId;

@@ -8,6 +8,9 @@ import com.example.asiantech.playmusic.fragment.LyricsFragment_;
 import com.example.asiantech.playmusic.fragment.PlayListFragment_;
 import com.example.asiantech.playmusic.fragment.VisualizerFragment_;
 
+/**
+ * @author hoaht
+ */
 public class PlaySongAdapter extends FragmentPagerAdapter {
     public PlaySongAdapter(FragmentManager fm) {
         super(fm);

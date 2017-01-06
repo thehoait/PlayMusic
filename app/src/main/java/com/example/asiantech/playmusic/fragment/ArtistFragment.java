@@ -20,8 +20,11 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
+/**
+ * @author hoaht
+ */
 @EFragment(R.layout.artist_fragment)
-public class ArtistFragment extends Fragment implements OnItemListener{
+public class ArtistFragment extends Fragment implements OnItemListener {
     private ArrayList<Song> mListSong;
     private ArrayList<Artist> mListArtist;
     @ViewById(R.id.recycleViewListArtist)

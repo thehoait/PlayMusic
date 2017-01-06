@@ -13,6 +13,9 @@ import com.example.asiantech.playmusic.model.Artist;
 
 import java.util.ArrayList;
 
+/**
+ * @author hoaht
+ */
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
     private Context mContext;
     private ArrayList<Artist> mListArtist;
@@ -32,7 +35,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
 
     @Override
     public void onBindViewHolder(ArtistViewHolder holder, int position) {
-        holder.mTvNameArtist.setText(mListArtist.get(position).getArtist());
+        holder.mTvNameArtist.setText(mListArtist.get(position).getArtistName());
     }
 
     @Override
@@ -40,6 +43,9 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         return mListArtist.size();
     }
 
+    /**
+     * Artist View Holder
+     */
     class ArtistViewHolder extends RecyclerView.ViewHolder {
         private TextView mTvNameArtist;
 

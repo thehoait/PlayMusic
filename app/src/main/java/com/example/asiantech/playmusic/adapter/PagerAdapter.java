@@ -8,6 +8,9 @@ import com.example.asiantech.playmusic.fragment.AlbumsFragment_;
 import com.example.asiantech.playmusic.fragment.ArtistFragment_;
 import com.example.asiantech.playmusic.fragment.SongListFragment_;
 
+/**
+ * @author hoaht
+ */
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private String[] mTitles = {"Songs", "Albums", "Artist"};
     private Fragment mSongListFragment = new SongListFragment_();

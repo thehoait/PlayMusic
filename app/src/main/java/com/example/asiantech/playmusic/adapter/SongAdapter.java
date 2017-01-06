@@ -14,6 +14,9 @@ import com.example.asiantech.playmusic.model.Song;
 
 import java.util.ArrayList;
 
+/**
+ * @author hoaht
+ */
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
     private Context mContext;
     private ArrayList<Song> mListSong;
@@ -48,6 +51,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         return mListSong.size();
     }
 
+    /**
+     * Song View Holder
+     */
     class SongViewHolder extends RecyclerView.ViewHolder {
         private TextView mTvTitle;
         private TextView mTvArtist;

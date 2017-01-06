@@ -25,8 +25,13 @@ import org.androidannotations.annotations.ViewById;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author hoaht
+ */
 @EFragment(R.layout.albums_fragment)
 public class AlbumsFragment extends Fragment {
+
+    private static final String TAG = AlbumsFragment.class.getSimpleName();
     private ArrayList<Song> mListSong;
     private ArrayList<Album> mListAlbum;
     @ViewById(R.id.gvAlbums)
@@ -34,7 +39,7 @@ public class AlbumsFragment extends Fragment {
 
     @AfterViews
     void afterView() {
-        Log.d("TAG ALBUMS_FRAGMENT", "afterView");
+        Log.d(TAG, "afterView: ");
         if (getActivity() instanceof MainActivity_) {
             mListSong = ((MainActivity_) getActivity()).getMListSong();
         }
@@ -80,7 +85,7 @@ public class AlbumsFragment extends Fragment {
                     albumArtUri);
             bitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "getImageBitmap: " + e);
         }
         return bitmap;
     }
