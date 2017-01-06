@@ -22,21 +22,24 @@ import java.util.ArrayList;
  */
 @EFragment(R.layout.song_list_fragment)
 public class SongListFragment extends Fragment {
+
+    private static final String TAG = SongListFragment.class.getSimpleName();
+
     @ViewById(R.id.recycleViewListSong)
     RecyclerView mRecycleListSong;
+
     private SongAdapter mAdapter;
-    private ArrayList<Song> mListSong;
     private OnItemListener mOnItemListener;
 
     @AfterViews
     void afterView() {
-        Log.d("TAG SONG LIST FRAGMENT", "afterView");
-        mListSong = new ArrayList<>();
+        Log.d(TAG, "afterView: ");
+        ArrayList<Song> listSong = new ArrayList<>();
         if (getActivity() instanceof MainActivity_) {
-            mListSong = ((MainActivity_) getActivity()).getMListSong();
+            listSong = ((MainActivity_) getActivity()).getMListSong();
             mOnItemListener = ((MainActivity_) getActivity()).getMOnItemListener();
         }
-        mAdapter = new SongAdapter(getContext(), mListSong, mOnItemListener);
+        mAdapter = new SongAdapter(getContext(), listSong, mOnItemListener);
         mRecycleListSong.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecycleListSong.setAdapter(mAdapter);
     }
@@ -45,7 +48,7 @@ public class SongListFragment extends Fragment {
         if (mAdapter != null) {
             mAdapter.notifyDataSetChanged();
         } else {
-            Log.d("sss", "adapter is null");
+            Log.d(TAG, "notifySongListAdapter: adapter is null");
         }
 
     }

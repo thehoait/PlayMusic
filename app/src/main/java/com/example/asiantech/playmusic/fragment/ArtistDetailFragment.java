@@ -10,7 +10,7 @@ import org.androidannotations.annotations.EFragment;
  * @author hoaht
  */
 @EFragment(R.layout.list_detail_fragment)
-public class ArtistDetailFragment extends BaseDetailFragment{
+public class ArtistDetailFragment extends BaseDetailFragment {
 
     @Override
     protected long getTypeId(Song song) {

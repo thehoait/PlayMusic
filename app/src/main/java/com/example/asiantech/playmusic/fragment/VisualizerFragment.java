@@ -25,14 +25,18 @@ import org.androidannotations.annotations.ViewById;
  */
 @EFragment(R.layout.visualizor_fragment)
 public class VisualizerFragment extends Fragment {
+
+    private static final String TAG = VisualizerFragment.class.getSimpleName();
+
     @ViewById(R.id.imgCircleMusic)
     ImageView mImgCircleMusic;
+
     CircleAnimation mAnimation;
     MusicService mMusicService;
 
     @AfterViews
     void afterView() {
-        Log.d("TAG VISUALIZER", "afterView");
+        Log.d(TAG, "afterView: ");
         initAnimation();
         if (getActivity() instanceof MainActivity) {
             mMusicService = ((MainActivity) getActivity()).getMMusicService();
@@ -57,7 +61,7 @@ public class VisualizerFragment extends Fragment {
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("TAG VISUALIZER", "onReceive");
+            Log.d(TAG, "onReceive: ");
             if (intent != null) {
                 String message = intent.getExtras().getString("message");
                 if (message != null) {
@@ -68,7 +72,7 @@ public class VisualizerFragment extends Fragment {
     };
 
     public void updateAnimation() {
-        Log.d("TAG VISUALIZER", "updateAnimation");
+        Log.d(TAG, "updateAnimation: ");
         if (mMusicService.isPlaying()) {
             mAnimation.resume();
         } else {
@@ -91,8 +95,8 @@ public class VisualizerFragment extends Fragment {
         private long mElapsedAtPause = 0;
         private boolean mPaused = false;
 
-        public CircleAnimation(float fromDegrees, float toDegrees, int pivotXType,
-                               float pivotXValue, int pivotYType, float pivotYValue) {
+        private CircleAnimation(float fromDegrees, float toDegrees, int pivotXType,
+                                float pivotXValue, int pivotYType, float pivotYValue) {
             super(fromDegrees, toDegrees, pivotXType, pivotXValue, pivotYType, pivotYValue);
         }
 
@@ -107,12 +111,12 @@ public class VisualizerFragment extends Fragment {
             return super.getTransformation(currentTime, outTransformation);
         }
 
-        public void pause() {
+        private void pause() {
             mElapsedAtPause = 0;
             mPaused = true;
         }
 
-        public void resume() {
+        private void resume() {
             mPaused = false;
         }
     }
