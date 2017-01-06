@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/imgMusic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:contentDescription="@null"
+        android:src="@drawable/notify_music" />
+
+    <TextView
+        android:id="@+id/tvSongTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/imgMusic"
+        android:layout_toLeftOf="@id/imgPrevious"
+        android:layout_toRightOf="@+id/imgMusic"
+        android:layout_toStartOf="@+id/imgPrevious"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/app_name"
+        android:textColor="#80000000"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imgPrevious"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/imgPlay"
+        android:layout_toStartOf="@+id/imgPlay"
+        android:contentDescription="@null"
+        android:padding="5dp"
+        android:src="@drawable/button_notify_previous" />
+
+    <ImageView
+        android:id="@+id/imgPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/imgNext"
+        android:layout_toStartOf="@+id/imgNext"
+        android:contentDescription="@null"
+        android:padding="5dp"
+        android:src="@drawable/button_notify_play" />
+
+    <ImageView
+        android:id="@+id/imgNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/imgClose"
+        android:layout_toStartOf="@+id/imgClose"
+        android:contentDescription="@null"
+        android:padding="5dp"
+        android:src="@drawable/button_notify_next" />
+
+    <ImageView
+        android:id="@+id/imgClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@null"
+        android:padding="5dp"
+        android:src="@drawable/notify_stop" />
+</RelativeLayout>

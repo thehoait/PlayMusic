@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Play Music</string>
+    <string name="textview.text.init_time">00:00</string>
+</resources>
