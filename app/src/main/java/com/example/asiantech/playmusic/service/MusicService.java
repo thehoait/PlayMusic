@@ -37,7 +37,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     private MediaPlayer mMediaPlayer;
     private ArrayList<Song> mPlayList;
     private int mSongPosition;
-    private IBinder mMusicBinder = new MusicBinder();
+    private final IBinder mMusicBinder = new MusicBinder();
     private static final int NOTIFICATION_ID = 111;
     private String mMessage = "";
     private RemoteViews mRemoteViews;
@@ -276,7 +276,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         playSong();
     }
 
-    public void playRandom() {
+    private void playRandom() {
         Log.d(TAG, "playRandom: ");
         Random random = new Random();
         mSongPosition = random.nextInt(mPlayList.size() - 1);

@@ -83,10 +83,10 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
     @Getter
     private MusicService mMusicService;
     private Intent mPlayIntent;
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final String ACTION_STRING_ACTIVITY = "ToActivity";
-    public static final String LIST_TYPE_ALL_SONG = "AllSong";
+    private static final String LIST_TYPE_ALL_SONG = "AllSong";
     public static final String LIST_TYPE_ALBUM = "Album";
     public static final String LIST_TYPE_ARTIST = "Artist";
     private PagerAdapter mPagerAdapter;
@@ -114,13 +114,11 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
         mTvSongTitle.setSelected(true);
         mSeekBar.setMax(1000);
         mSeekBar.setOnSeekBarChangeListener(mListener);
-        if (mReceiver != null) {
-            IntentFilter intentFilter = new IntentFilter(ACTION_STRING_ACTIVITY);
-            registerReceiver(mReceiver, intentFilter);
-        }
+        IntentFilter intentFilter = new IntentFilter(ACTION_STRING_ACTIVITY);
+        registerReceiver(mReceiver, intentFilter);
     }
 
-    private ServiceConnection mMusicConnection = new ServiceConnection() {
+    private final ServiceConnection mMusicConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.d(TAG, "onServiceConnected: ");
@@ -140,14 +138,14 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
         }
     };
 
-    private Runnable mRunnable = new Runnable() {
+    private final Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
             updateProgress();
         }
     };
 
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "onReceive: ");
@@ -195,7 +193,7 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
         }
     }
 
-    private SeekBar.OnSeekBarChangeListener mListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener mListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             if (!fromUser) {
@@ -439,8 +437,6 @@ public class MainActivity extends FragmentActivity implements OnItemListener {
 
     public void resetController() {
         Log.d(TAG, "resetController: ");
-        if (mHandler != null && mRunnable != null) {
-            mHandler.removeCallbacks(mRunnable);
-        }
+        mHandler.removeCallbacks(mRunnable);
     }
 }

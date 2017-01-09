@@ -57,7 +57,7 @@ public class PlaySongFragment extends Fragment {
 
     private static final String TAG = PlaySongFragment.class.getSimpleName();
     private MusicService mMusicService;
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private int mMode;
 
     @AfterViews
@@ -73,10 +73,8 @@ public class PlaySongFragment extends Fragment {
         setSongTime();
         updateProgress();
         updateMode();
-        if (mReceiver != null) {
-            IntentFilter intentFilter = new IntentFilter(MainActivity.ACTION_STRING_ACTIVITY);
-            getActivity().registerReceiver(mReceiver, intentFilter);
-        }
+        IntentFilter intentFilter = new IntentFilter(MainActivity.ACTION_STRING_ACTIVITY);
+        getActivity().registerReceiver(mReceiver, intentFilter);
         mSeekBar.setOnSeekBarChangeListener(mListener);
     }
 
@@ -88,7 +86,7 @@ public class PlaySongFragment extends Fragment {
         mViewPager.setCurrentItem(1);
     }
 
-    private SeekBar.OnSeekBarChangeListener mListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener mListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             if (!fromUser) {
@@ -108,14 +106,14 @@ public class PlaySongFragment extends Fragment {
         }
     };
 
-    private Runnable mRunnable = new Runnable() {
+    private final Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
             updateProgress();
         }
     };
 
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent != null) {
@@ -221,19 +219,15 @@ public class PlaySongFragment extends Fragment {
         }
     }
 
-    public void resetController() {
+    private void resetController() {
         Log.d(TAG, "resetController: ");
-        if (mHandler != null && mRunnable != null) {
-            mHandler.removeCallbacks(mRunnable);
-        }
+        mHandler.removeCallbacks(mRunnable);
     }
 
     @Override
     public void onDestroy() {
         Log.d(TAG, "onDestroy: ");
-        if (mHandler != null) {
-            mHandler.removeCallbacks(mRunnable);
-        }
+        mHandler.removeCallbacks(mRunnable);
         getActivity().unregisterReceiver(mReceiver);
         super.onDestroy();
     }

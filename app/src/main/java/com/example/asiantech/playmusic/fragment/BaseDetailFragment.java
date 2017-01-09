@@ -43,7 +43,7 @@ public abstract class BaseDetailFragment extends Fragment implements OnItemListe
     @FragmentArg
     long albumId;
 
-    protected MusicService mMusicService;
+    MusicService mMusicService;
     private ArrayList<Song> mListSongAlbum;
     private SongAdapter mAdapter;
 
@@ -76,10 +76,8 @@ public abstract class BaseDetailFragment extends Fragment implements OnItemListe
         mAdapter = new SongAdapter(getContext(), mListSongAlbum, this);
         mRecycleListSong.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecycleListSong.setAdapter(mAdapter);
-        if (mReceiver != null) {
-            IntentFilter intentFilter = new IntentFilter(MainActivity.ACTION_STRING_ACTIVITY);
-            getActivity().registerReceiver(mReceiver, intentFilter);
-        }
+        IntentFilter intentFilter = new IntentFilter(MainActivity.ACTION_STRING_ACTIVITY);
+        getActivity().registerReceiver(mReceiver, intentFilter);
     }
 
     protected abstract long getTypeId(Song song);
@@ -88,7 +86,7 @@ public abstract class BaseDetailFragment extends Fragment implements OnItemListe
 
     protected abstract void setListType();
 
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "onReceive: ");
@@ -123,9 +121,7 @@ public abstract class BaseDetailFragment extends Fragment implements OnItemListe
 
     @Override
     public void onDestroy() {
-        if (mReceiver != null) {
-            getActivity().unregisterReceiver(mReceiver);
-        }
+        getActivity().unregisterReceiver(mReceiver);
         super.onDestroy();
     }
 

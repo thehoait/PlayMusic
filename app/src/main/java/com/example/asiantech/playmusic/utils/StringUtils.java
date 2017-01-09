@@ -7,7 +7,7 @@ import java.util.Locale;
  * @author HoaHT
  */
 
-public class StringUtils {
+public final class StringUtils {
 
     private StringUtils() {
     }

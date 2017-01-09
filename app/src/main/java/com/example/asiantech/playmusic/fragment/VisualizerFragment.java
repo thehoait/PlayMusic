@@ -31,8 +31,8 @@ public class VisualizerFragment extends Fragment {
     @ViewById(R.id.imgCircleMusic)
     ImageView mImgCircleMusic;
 
-    CircleAnimation mAnimation;
-    MusicService mMusicService;
+    private CircleAnimation mAnimation;
+    private MusicService mMusicService;
 
     @AfterViews
     void afterView() {
@@ -42,15 +42,13 @@ public class VisualizerFragment extends Fragment {
             mMusicService = ((MainActivity) getActivity()).getMMusicService();
         }
         updateAnimation();
-        if (mReceiver != null) {
-            IntentFilter intentFilter = new IntentFilter(MainActivity.ACTION_STRING_ACTIVITY);
-            getActivity().registerReceiver(mReceiver, intentFilter);
-        }
+        IntentFilter intentFilter = new IntentFilter(MainActivity.ACTION_STRING_ACTIVITY);
+        getActivity().registerReceiver(mReceiver, intentFilter);
     }
 
     private void initAnimation() {
-        mAnimation = new CircleAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f);
+        mAnimation = new CircleAnimation(
+        );
         mAnimation.setDuration(5000);
         mAnimation.setRepeatCount(Animation.INFINITE);
         mAnimation.setRepeatMode(Animation.RESTART);
@@ -58,7 +56,7 @@ public class VisualizerFragment extends Fragment {
         mImgCircleMusic.setAnimation(mAnimation);
     }
 
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "onReceive: ");
@@ -71,7 +69,7 @@ public class VisualizerFragment extends Fragment {
         }
     };
 
-    public void updateAnimation() {
+    private void updateAnimation() {
         Log.d(TAG, "updateAnimation: ");
         if (mMusicService.isPlaying()) {
             mAnimation.resume();
@@ -95,9 +93,8 @@ public class VisualizerFragment extends Fragment {
         private long mElapsedAtPause = 0;
         private boolean mPaused = false;
 
-        private CircleAnimation(float fromDegrees, float toDegrees, int pivotXType,
-                                float pivotXValue, int pivotYType, float pivotYValue) {
-            super(fromDegrees, toDegrees, pivotXType, pivotXValue, pivotYType, pivotYValue);
+        private CircleAnimation() {
+            super((float) 0, (float) 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         }
 
         @Override

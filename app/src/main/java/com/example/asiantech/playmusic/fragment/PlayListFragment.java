@@ -48,13 +48,11 @@ public class PlayListFragment extends Fragment implements OnItemListener {
         mRecycleListSong.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecycleListSong.setAdapter(mAdapter);
         mRecycleListSong.scrollToPosition(mMusicService.getSongPosition());
-        if (mReceiver != null) {
-            IntentFilter intentFilter = new IntentFilter(MainActivity.ACTION_STRING_ACTIVITY);
-            getActivity().registerReceiver(mReceiver, intentFilter);
-        }
+        IntentFilter intentFilter = new IntentFilter(MainActivity.ACTION_STRING_ACTIVITY);
+        getActivity().registerReceiver(mReceiver, intentFilter);
     }
 
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d("TAG PLAY LIST FRAGMENT", "onReceive");
