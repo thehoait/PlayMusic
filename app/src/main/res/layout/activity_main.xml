@@ -97,10 +97,10 @@
                 android:layout_toRightOf="@+id/imgNext"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"
                 android:text="@string/app_name"
                 android:textColor="#ffffff"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:maxLines="1" />
         </RelativeLayout>
 
         <RelativeLayout

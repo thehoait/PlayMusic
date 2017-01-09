@@ -49,7 +49,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     class ArtistViewHolder extends RecyclerView.ViewHolder {
         private final TextView mTvNameArtist;
 
-        public ArtistViewHolder(View itemView) {
+        private ArtistViewHolder(View itemView) {
             super(itemView);
             mTvNameArtist = (TextView) itemView.findViewById(R.id.tvNameArtist);
             itemView.setOnClickListener(new View.OnClickListener() {

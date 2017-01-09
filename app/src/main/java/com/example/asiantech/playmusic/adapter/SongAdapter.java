@@ -58,7 +58,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         private final TextView mTvTitle;
         private final TextView mTvArtist;
 
-        public SongViewHolder(View itemView) {
+        private SongViewHolder(View itemView) {
             super(itemView);
             mTvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             mTvArtist = (TextView) itemView.findViewById(R.id.tvArtist);
