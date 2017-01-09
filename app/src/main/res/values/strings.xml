@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Play Music</string>
-    <string name="textview.text.init_time">00:00</string>
+    <string name="tv_text_init_time">00:00</string>
+    <string name="tvNoLyrics">No Lyrics</string>
 </resources>

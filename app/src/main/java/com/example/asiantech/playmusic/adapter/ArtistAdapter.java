@@ -46,7 +46,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     /**
      * Artist View Holder
      */
-    class ArtistViewHolder extends RecyclerView.ViewHolder {
+    final class ArtistViewHolder extends RecyclerView.ViewHolder {
         private final TextView mTvNameArtist;
 
         private ArtistViewHolder(View itemView) {

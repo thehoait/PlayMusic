@@ -54,7 +54,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     /**
      * Song View Holder
      */
-    class SongViewHolder extends RecyclerView.ViewHolder {
+    final class SongViewHolder extends RecyclerView.ViewHolder {
         private final TextView mTvTitle;
         private final TextView mTvArtist;
 

@@ -38,7 +38,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/view.line_recyclerview_height"
+        android:layout_height="@dimen/view_line_list_height"
         android:layout_alignParentBottom="true"
         android:background="#ffffff" />
 </RelativeLayout>
