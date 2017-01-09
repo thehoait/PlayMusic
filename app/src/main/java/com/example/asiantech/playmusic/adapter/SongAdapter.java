@@ -18,9 +18,9 @@ import java.util.ArrayList;
  * @author hoaht
  */
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
-    private Context mContext;
-    private ArrayList<Song> mListSong;
-    private OnItemListener mListener;
+    private final Context mContext;
+    private final ArrayList<Song> mListSong;
+    private final OnItemListener mListener;
 
     public SongAdapter(Context context, ArrayList<Song> listSong, OnItemListener listener) {
         this.mContext = context;
@@ -55,8 +55,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
      * Song View Holder
      */
     class SongViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTvTitle;
-        private TextView mTvArtist;
+        private final TextView mTvTitle;
+        private final TextView mTvArtist;
 
         public SongViewHolder(View itemView) {
             super(itemView);

@@ -12,10 +12,10 @@ import com.example.asiantech.playmusic.fragment.SongListFragment_;
  * @author hoaht
  */
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    private String[] mTitles = {"Songs", "Albums", "Artist"};
-    private Fragment mSongListFragment = new SongListFragment_();
-    private Fragment mAlbumsFragment = new AlbumsFragment_();
-    private Fragment mArtistFragment = new ArtistFragment_();
+    private final String[] mTitles = {"Songs", "Albums", "Artist"};
+    private final Fragment mSongListFragment = new SongListFragment_();
+    private final Fragment mAlbumsFragment = new AlbumsFragment_();
+    private final Fragment mArtistFragment = new ArtistFragment_();
 
     public PagerAdapter(FragmentManager fm) {
         super(fm);

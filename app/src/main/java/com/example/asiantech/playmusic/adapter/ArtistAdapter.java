@@ -17,9 +17,9 @@ import java.util.ArrayList;
  * @author hoaht
  */
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
-    private Context mContext;
-    private ArrayList<Artist> mListArtist;
-    private OnItemListener mListener;
+    private final Context mContext;
+    private final ArrayList<Artist> mListArtist;
+    private final OnItemListener mListener;
 
     public ArtistAdapter(Context context, ArrayList<Artist> listArtist, OnItemListener listener) {
         this.mContext = context;
@@ -47,7 +47,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
      * Artist View Holder
      */
     class ArtistViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTvNameArtist;
+        private final TextView mTvNameArtist;
 
         public ArtistViewHolder(View itemView) {
             super(itemView);

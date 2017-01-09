@@ -88,7 +88,7 @@ public class VisualizerFragment extends Fragment {
     /**
      * Circle Animation
      */
-    public class CircleAnimation extends RotateAnimation {
+    public final class CircleAnimation extends RotateAnimation {
 
         private long mElapsedAtPause = 0;
         private boolean mPaused = false;

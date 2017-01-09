@@ -17,8 +17,8 @@ import java.util.ArrayList;
  * @author hoaht
  */
 public class AlbumAdapter extends BaseAdapter {
-    private Context mContext;
-    private ArrayList<Album> mListAlbum;
+    private final Context mContext;
+    private final ArrayList<Album> mListAlbum;
 
     public AlbumAdapter(Context context, ArrayList<Album> listAlbum) {
         this.mContext = context;
