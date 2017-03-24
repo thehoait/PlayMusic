@@ -48,10 +48,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
     apt 'org.androidannotations:androidannotations:3.3.2'
     compile 'org.androidannotations:androidannotations-api:3.3.2'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.android.support:recyclerview-v7:25.3.0'
     compile 'org.projectlombok:lombok:1.16.6'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile 'me.relex:circleindicator:1.2.2@aar'
