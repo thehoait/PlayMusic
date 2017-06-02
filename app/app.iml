@@ -23,17 +23,30 @@
     </facet>
     <facet type="kotlin-language" name="Kotlin">
       <configuration version="2" platform="JVM 1.6" useProjectSettings="false">
-        <compilerSettings />
+        <compilerSettings>
+          <option name="additionalArguments" value="-no-jdk" />
+        </compilerSettings>
         <compilerArguments>
+          <option name="destination" value="$MODULE_DIR$/build/tmp/kotlin-classes/releaseUnitTest" />
+          <option name="classpath" value="$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.astuetz/pagerslidingtabstrip/1.0.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.3.1/jars/classes.jar:/home/hoaht/AndroidStudioProject1/PlayMusic/app/build/intermediates/exploded-aar/me.relex/circleindicator/1.2.2/jars/classes.jar:/home/hoaht/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar:/home/hoaht/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.1.2-4/e6a7403299b8f3126e3a1576c02e3f07ae5af6fa/kotlin-stdlib-jre7-1.1.2-4.jar:/home/hoaht/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.1.2-4/3f5f1498bdbb9611cb1413f794b3a3a5a6edef34/kotlin-stdlib-1.1.2-4.jar:/home/hoaht/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar:/home/hoaht/Android/Sdk/platforms/android-25/android.jar" />
+          <option name="noStdlib" value="true" />
+          <option name="noReflect" value="true" />
+          <option name="moduleName" value="app_release" />
           <option name="jvmTarget" value="1.6" />
+          <option name="addCompilerBuiltIns" value="true" />
           <option name="languageVersion" value="1.1" />
           <option name="apiVersion" value="1.1" />
           <option name="pluginClasspaths">
-            <array />
+            <array>
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.1.2-4/e93295c7a55a4f7072c61826ed5039cae29ae795/kotlin-android-extensions-1.1.2-4.jar" />
+            </array>
           </option>
           <option name="coroutinesWarn" value="true" />
           <option name="pluginOptions">
-            <array />
+            <array>
+              <option value="plugin:org.jetbrains.kotlin.android:package=com.example.asiantech.playmusic" />
+              <option value="plugin:org.jetbrains.kotlin.android:variant=main;/home/hoaht/AndroidStudioProject1/PlayMusic/app/src/main/res" />
+            </array>
           </option>
         </compilerArguments>
       </configuration>
