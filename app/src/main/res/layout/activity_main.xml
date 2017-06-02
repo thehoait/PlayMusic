@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlMainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context=".MainActivity">
+    android:background="@drawable/bg">
 
     <RelativeLayout
         android:id="@+id/rlContainer"
@@ -97,10 +95,10 @@
                 android:layout_toRightOf="@+id/imgNext"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
+                android:maxLines="1"
                 android:text="@string/app_name"
                 android:textColor="#ffffff"
-                android:textSize="14sp"
-                android:maxLines="1" />
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
